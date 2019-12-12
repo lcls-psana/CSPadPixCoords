@@ -143,7 +143,7 @@ private:
 
       typedef int16_t data_cspad_t;
 
-      shared_ptr<TELEMENT> elem = evt.get(m_source, m_inkey, &m_src); // get m_src here
+      boost::shared_ptr<TELEMENT> elem = evt.get(m_source, m_inkey, &m_src); // get m_src here
       
       if (elem) {
 

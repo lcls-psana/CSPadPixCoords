@@ -207,7 +207,7 @@ private:
 
     //cout  << " Check configuration for source: " << m_source << endl;	     
 
-        shared_ptr<T> config = env.configStore().get(m_source, &m_src);
+        boost::shared_ptr<T> config = env.configStore().get(m_source, &m_src);
         if (config.get()) {
             for (uint32_t q = 0; q < NQuadsMax; ++ q) {
               m_roiMask[q]         = config->roiMask(q);
@@ -232,7 +232,7 @@ private:
 
     std::string key=""; // FOR RAW CSPAD DATA
 
-    shared_ptr<TDATA> data = evt.get(m_source, key, &m_src);
+    boost::shared_ptr<TDATA> data = evt.get(m_source, key, &m_src);
     if (data.get()) {
       m_numQuads = data->quads_shape()[0];
 
@@ -315,7 +315,7 @@ private:
       //typedef double  TOUT; // ok
       //typedef float   TOUT; // ok
 
-      shared_ptr<TDATA> data_shp = evt.get(m_source, m_inkey, &m_src); // get m_src here
+      boost::shared_ptr<TDATA> data_shp = evt.get(m_source, m_inkey, &m_src); // get m_src here
       
       if (data_shp.get()) {
       
@@ -402,10 +402,10 @@ private:
         if( m_print_bits & 8 ) MsgLog(name(), info, "Produce image from CSPAD ndarray, source:" << m_source 
     	                                           << " key:" << m_inkey << " data type:" << typeid(T).name() );
         
-        shared_ptr< ndarray<const T,3> > shp_const = evt.get(m_source, m_inkey, &m_src); // get m_src here
+        boost::shared_ptr< ndarray<const T,3> > shp_const = evt.get(m_source, m_inkey, &m_src); // get m_src here
         if (shp_const.get()) { procCSPadNDArrForTypeAndNDArr<T>(evt, *shp_const.get()); return true; }
 
-        shared_ptr< ndarray<T,3> > shp = evt.get(m_source, m_inkey, &m_src); // get m_src here
+        boost::shared_ptr< ndarray<T,3> > shp = evt.get(m_source, m_inkey, &m_src); // get m_src here
         if (shp.get()) { procCSPadNDArrForTypeAndNDArr<T>(evt, *shp.get()); return true; }
 
         return false;

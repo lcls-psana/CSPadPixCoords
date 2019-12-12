@@ -105,7 +105,7 @@ CSPadInterpolImageProducer::beginRun(Event& evt, Env& env)
   cout << "ImageCSPad::beginRun " << endl;
 
   // get run number
-  shared_ptr<EventId> eventId = evt.get();
+  boost::shared_ptr<EventId> eventId = evt.get();
   int run = 0;
   if (eventId.get()) {
     run = eventId->run();
@@ -143,7 +143,7 @@ CSPadInterpolImageProducer::beginRun(Event& evt, Env& env)
 void 
 CSPadInterpolImageProducer::getConfigPars(Env& env)
 {
-  shared_ptr<Psana::CsPad::ConfigV3> config = env.configStore().get(m_src);
+  boost::shared_ptr<Psana::CsPad::ConfigV3> config = env.configStore().get(m_src);
   if (config.get()) {
       for (uint32_t q = 0; q < NQuadsMax; ++ q) {
         m_roiMask[q]         = config->roiMask(q);
@@ -180,7 +180,7 @@ CSPadInterpolImageProducer::event(Event& evt, Env& env)
     int status = clock_gettime( CLOCK_REALTIME, &start ); // Get LOCAL time
     //-------------------- Time
 
-  shared_ptr<Psana::CsPad::DataV2> data2 = evt.get(m_src, m_inkey, &m_actualSrc); // get m_actualSrc here
+  boost::shared_ptr<Psana::CsPad::DataV2> data2 = evt.get(m_src, m_inkey, &m_actualSrc); // get m_actualSrc here
 
   if (data2.get()) {
 
@@ -589,13 +589,13 @@ CSPadInterpolImageProducer::cspad_image_add_in_event(Event& evt)
 {
   if(m_imgkey == "Image2D") {
 
-    shared_ptr< CSPadPixCoords::Image2D<double> > img2d( new CSPadPixCoords::Image2D<double>(&m_arr_cspad_image[0][0],NY_CSPAD,NX_CSPAD) );
+    boost::shared_ptr< CSPadPixCoords::Image2D<double> > img2d( new CSPadPixCoords::Image2D<double>(&m_arr_cspad_image[0][0],NY_CSPAD,NX_CSPAD) );
     evt.put(img2d, m_actualSrc, m_imgkey);
 
   } else {
 
     const unsigned shape[] = {NY_CSPAD,NX_CSPAD};
-    shared_ptr< ndarray<double,2> > img2d( new ndarray<double,2>(&m_arr_cspad_image[0][0],shape) );
+    boost::shared_ptr< ndarray<double,2> > img2d( new ndarray<double,2>(&m_arr_cspad_image[0][0],shape) );
     evt.put(img2d, m_actualSrc, m_imgkey);
   }
 

@@ -184,19 +184,19 @@ public:
   const static unsigned NCORNERS    =   4;
 
   /// Pixel size [um] in column direction
-  const static double PIX_SIZE_COLS = 109.92;
+  constexpr static double PIX_SIZE_COLS = 109.92;
 
   /// Pixel size [um] in row direction
-  const static double PIX_SIZE_ROWS = 109.92;
+  constexpr static double PIX_SIZE_ROWS = 109.92;
 
   /// Wide pixel length [um] 
-  const static double PIX_SIZE_WIDE = 274.80;
+  constexpr static double PIX_SIZE_WIDE = 274.80;
 
   /// Pixel size [um]  
-  const static double PIX_SIZE_UM   = 109.92;
+  constexpr static double PIX_SIZE_UM   = 109.92;
 
   /// Conversion factor between um and pix 
-  const static double UM_TO_PIX     = 1./109.92;
+  constexpr static double UM_TO_PIX     = 1./109.92;
 
   // Constructor
 

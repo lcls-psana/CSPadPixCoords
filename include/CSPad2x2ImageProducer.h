@@ -169,7 +169,7 @@ public:
   template <typename T>
   bool getConfigParsForType(Env& env)
   {
-      shared_ptr<T> config = env.configStore().get(m_source, &m_src);
+      boost::shared_ptr<T> config = env.configStore().get(m_source, &m_src);
       if (config) {
         m_roiMask        = config->roiMask();
         m_numAsicsStored = config->numAsicsStored();
@@ -243,7 +243,7 @@ public:
   template <typename TELEMENT>
   bool procCSPad2x2DataForType (Event& evt) {
 
-    shared_ptr<TELEMENT> elem1 = evt.get(m_source, m_inkey, &m_src); // get m_src here
+    boost::shared_ptr<TELEMENT> elem1 = evt.get(m_source, m_inkey, &m_src); // get m_src here
 
     if (elem1) {
 
@@ -276,10 +276,10 @@ public:
     if( m_print_bits & 8 ) MsgLog(name(), warning, "Produce image from CSPAD array, source:" << m_source 
                                   << " key:" << m_inkey << " data type:" << typeid(T).name() );
     
-    shared_ptr< ndarray<const T,3> > shp_const = evt.get(m_source, m_inkey, &m_src); // get m_src here
+    boost::shared_ptr< ndarray<const T,3> > shp_const = evt.get(m_source, m_inkey, &m_src); // get m_src here
     if (shp_const.get()) { procCSPad2x2NDArrForTypeAndNDArr<T>(evt, *shp_const.get()); return true; }
     
-    shared_ptr< ndarray<T,3> > shp = evt.get(m_source, m_inkey, &m_src); // get m_src here
+    boost::shared_ptr< ndarray<T,3> > shp = evt.get(m_source, m_inkey, &m_src); // get m_src here
     if (shp.get()) { procCSPad2x2NDArrForTypeAndNDArr<T>(evt, *shp.get()); return true; }
     
     return false;

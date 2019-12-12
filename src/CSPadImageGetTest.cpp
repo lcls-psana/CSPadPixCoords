@@ -146,7 +146,7 @@ CSPadImageGetTest::endJob(Event& evt, Env& env)
 std::string  
 CSPadImageGetTest::strTimeStamp(Event& evt)
 {
-  shared_ptr<PSEvt::EventId> eventId = evt.get();
+  boost::shared_ptr<PSEvt::EventId> eventId = evt.get();
   if (eventId.get()) {
 
     //m_time = eventId->time();
@@ -165,7 +165,7 @@ CSPadImageGetTest::strTimeStamp(Event& evt)
 std::string  
 CSPadImageGetTest::strRunNumber(Event& evt)
 {
-  shared_ptr<PSEvt::EventId> eventId = evt.get();
+  boost::shared_ptr<PSEvt::EventId> eventId = evt.get();
   if (eventId.get()) {
     stringstream ssRunNum; ssRunNum << "r" << setw(4) << setfill('0') << eventId->run();
     return ssRunNum.str();
@@ -194,14 +194,14 @@ CSPadImageGetTest::saveImageInFile(Event& evt)
 
   // In case if m_key == "Image2D" 
 
-  shared_ptr< CSPadPixCoords::Image2D<double> > img2d = evt.get(m_str_src, m_key, &m_src);
+  boost::shared_ptr< CSPadPixCoords::Image2D<double> > img2d = evt.get(m_str_src, m_key, &m_src);
   if (img2d.get()) {
     MsgLog(name(), info, "::saveImageInFile(...): Get image as Image2D<double> from event and save it in file");
     img2d -> saveImageInFile(fname,0);
   } // if (img2d.get())
 
 
-  shared_ptr< ndarray<const double,2> > img = evt.get(m_str_src, m_key, &m_src);
+  boost::shared_ptr< ndarray<const double,2> > img = evt.get(m_str_src, m_key, &m_src);
   if (img.get()) {
     MsgLog(name(), info, "::saveImageInFile(...): Get image as ndarray<double,2> from event and save it in file");
     CSPadPixCoords::Image2D<double> *img2d = new CSPadPixCoords::Image2D<double>(img->data(),img->shape()[0],img->shape()[1]);

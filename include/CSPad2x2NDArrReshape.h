@@ -164,12 +164,12 @@ private:
   bool procEventForType (Event& evt, size_t i) {
 
       // for CONST
-      shared_ptr< ndarray<const T,3> > shp_const = evt.get(m_source, v_keys_in[i], &m_src); // get m_src here      
+      boost::shared_ptr< ndarray<const T,3> > shp_const = evt.get(m_source, v_keys_in[i], &m_src); // get m_src here      
       if (shp_const) { save3DArrInEvent<T>(evt, m_src, v_keys_out[i], reshape<T>(shp_const->data())); return true; }
 
 
       // for NON-CONST
-      shared_ptr< ndarray<T,3> > shp = evt.get(m_source, v_keys_in[i], &m_src); // get m_src here      
+      boost::shared_ptr< ndarray<T,3> > shp = evt.get(m_source, v_keys_in[i], &m_src); // get m_src here      
       if (shp) { save3DArrInEvent<T>(evt, m_src, v_keys_out[i], reshape<T>(shp->data())); return true; }
 
       return false;
@@ -186,12 +186,12 @@ private:
   bool procCalibForType (Env& env, size_t i) {
 
       // for CONST
-      shared_ptr< ndarray<const T,3> > shp_const = env.calibStore().get(m_source, &m_src, v_keys_in[i]); // get m_src here      
+      boost::shared_ptr< ndarray<const T,3> > shp_const = env.calibStore().get(m_source, &m_src, v_keys_in[i]); // get m_src here      
       if (shp_const) { save3DArrayInEnv<T>(env, m_src, v_keys_out[i], reshape<T>(shp_const->data())); return true; }
 
 
       // for NON-CONST
-      shared_ptr< ndarray<T,3> > shp = env.calibStore().get(m_source, &m_src, v_keys_in[i]); // get m_src here      
+      boost::shared_ptr< ndarray<T,3> > shp = env.calibStore().get(m_source, &m_src, v_keys_in[i]); // get m_src here      
       if (shp) { save3DArrayInEnv<T>(env, m_src, v_keys_out[i], reshape<T>(shp->data())); return true; }
 
       return false;

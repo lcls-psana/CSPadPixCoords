@@ -150,7 +150,7 @@ SaveImageInFile::endJob(Event& evt, Env& env)
 std::string  
 SaveImageInFile::strTimeStamp(Event& evt)
 {
-  shared_ptr<PSEvt::EventId> eventId = evt.get();
+  boost::shared_ptr<PSEvt::EventId> eventId = evt.get();
   if (eventId.get()) {
 
     //m_time = eventId->time();
@@ -169,7 +169,7 @@ SaveImageInFile::strTimeStamp(Event& evt)
 std::string  
 SaveImageInFile::strRunNumber(Event& evt)
 {
-  shared_ptr<PSEvt::EventId> eventId = evt.get();
+  boost::shared_ptr<PSEvt::EventId> eventId = evt.get();
   if (eventId.get()) {
     stringstream ssRunNum; ssRunNum << "r" << setw(4) << setfill('0') << eventId->run();
     return ssRunNum.str();
@@ -198,14 +198,14 @@ SaveImageInFile::saveImageInFile(Event& evt)
 
   // In case if m_key == "Image2D" 
 
-  shared_ptr< CSPadPixCoords::Image2D<double> > img2d = evt.get(m_str_src, m_key, &m_src);
+  boost::shared_ptr< CSPadPixCoords::Image2D<double> > img2d = evt.get(m_str_src, m_key, &m_src);
   if (img2d.get()) {
     if( m_print_bits & 2 )MsgLog(name(), info, "::saveImageInFile(...): Get image as Image2D<double> from event and save it in file");
     img2d -> saveImageInFile(fname,0);
   } // if (img2d.get())
 
 
-  shared_ptr< ndarray<const double,2> > img = evt.get(m_str_src, m_key, &m_src);
+  boost::shared_ptr< ndarray<const double,2> > img = evt.get(m_str_src, m_key, &m_src);
   if (img.get()) {
     if( m_print_bits & 2 ) MsgLog(name(), info, "::saveImageInFile(...): Get image as ndarray<double,2> from event and save it in file");
     CSPadPixCoords::Image2D<double> *img2d = new CSPadPixCoords::Image2D<double>(img->data(),img->shape()[0],img->shape()[1]);
@@ -213,7 +213,7 @@ SaveImageInFile::saveImageInFile(Event& evt)
   } // if (img.get())
 
 
-  shared_ptr< ndarray<const uint16_t,2> > img_u16 = evt.get(m_str_src, m_key, &m_src);
+  boost::shared_ptr< ndarray<const uint16_t,2> > img_u16 = evt.get(m_str_src, m_key, &m_src);
   if (img_u16.get()) {
     if( m_print_bits & 2 ) MsgLog(name(), info, "::saveImageInFile(...): Get image as ndarray<uint16_t,2> from event and save it in file");
     CSPadPixCoords::Image2D<uint16_t> *img2d = new CSPadPixCoords::Image2D<uint16_t>(img_u16->data(),img_u16->shape()[0],img_u16->shape()[1]);

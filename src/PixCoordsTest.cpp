@@ -114,7 +114,7 @@ PixCoordsTest::beginRun(Event& evt, Env& env)
 void 
 PixCoordsTest::getQuadConfigPars(Env& env)
 {
-  shared_ptr<Psana::CsPad::ConfigV3> config = env.configStore().get(m_src);
+  boost::shared_ptr<Psana::CsPad::ConfigV3> config = env.configStore().get(m_src);
   if (config.get()) {
       for (uint32_t q = 0; q < config->numQuads(); ++ q) {
         m_roiMask[q]         = config->roiMask(q);
@@ -152,7 +152,7 @@ PixCoordsTest::event(Event& evt, Env& env)
   if (m_count >= m_maxEvents) stop();
   cout << "m_count=" << m_count << endl;
 
-  shared_ptr<Psana::CsPad::DataV2> data2 = evt.get(m_src);
+  boost::shared_ptr<Psana::CsPad::DataV2> data2 = evt.get(m_src);
   if (data2.get()) {
 
         this -> test_cspad_init ();
