@@ -25,11 +25,12 @@ from __future__ import print_function
 # __author__   = "$Author: dubrovin@SLAC.STANFORD.EDU $"
 #------------------------------
 
+from builtins import object
 import sys
 
 #------------------------------
 
-class SvnProps :
+class SvnProps(object) :
     def __init__(self) : 
         self.updated  = "2014-05-05"
         self.revision = "$Revision$"
