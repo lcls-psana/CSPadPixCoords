@@ -101,7 +101,7 @@ T Image2D<T>::transpose (int row, int col)
            <<  "  col="   << col_transposed
            <<  "  nrows=" << m_nrows_transposed
            <<  "  ncols=" << m_ncols_transposed
-           << cout;
+           << endl;
       return 0;
     }
 }
